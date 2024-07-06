@@ -586,6 +586,11 @@ mapproxy_yaml_spec = {
                     'transparent': bool(),
                     'time': str()
                 },
+                'image': combined(image_opts, {
+                    'opacity': number(),
+                    'transparent_color': one_of(str(), [number()]),
+                    'transparent_color_tolerance': number(),
+                }),
                 'opts': {
                     'featureinfo': bool(),
                     'featureinfo_tolerance': number(),

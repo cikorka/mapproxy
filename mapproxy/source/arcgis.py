@@ -22,12 +22,14 @@ log = logging.getLogger('mapproxy.source.arcgis')
 class ArcGISSource(WMSSource):
     def __init__(self, client, image_opts=None, coverage=None,
                  res_range=None, supported_srs=None, supported_formats=None,
-                 error_handler=None):
+                 error_handler=None, transparent_color=None, transparent_color_tolerance=None):
         WMSSource.__init__(self, client, image_opts=image_opts,
                            coverage=coverage, res_range=res_range,
                            supported_srs=supported_srs,
                            supported_formats=supported_formats,
-                           error_handler=error_handler)
+                           error_handler=error_handler,
+                           transparent_color=transparent_color,
+                           transparent_color_tolerance=transparent_color_tolerance)
 
 
 class ArcGISInfoSource(WMSInfoSource):

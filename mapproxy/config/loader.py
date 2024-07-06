@@ -680,11 +680,20 @@ class ArcGISSourceConfiguration(SourceConfiguration):
 
         client = ArcGISClient(request, http_client)
         image_opts = self.image_opts(format=params.get('format'))
+
+        transparent_color = (self.conf.get('image') or {}).get('transparent_color')
+        transparent_color_tolerance = self.context.globals.get_value(
+            'image.transparent_color_tolerance', self.conf)
+        if transparent_color:
+            transparent_color = parse_color(transparent_color)
+
         return ArcGISSource(client, image_opts=image_opts, coverage=coverage,
                             res_range=res_range,
                             supported_srs=self.supported_srs(),
                             supported_formats=supported_formats or None,
-                            error_handler=self.on_error_handler())
+                            error_handler=self.on_error_handler(),
+                            transparent_color=transparent_color,
+                            transparent_color_tolerance=transparent_color_tolerance)
 
     @memoize
     def fi_source(self, params=None):
